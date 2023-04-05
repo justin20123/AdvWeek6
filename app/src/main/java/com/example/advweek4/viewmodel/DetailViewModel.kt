@@ -18,18 +18,16 @@ class DetailViewModel(application: Application): AndroidViewModel(application) {
     val TAG = "volleyTag"
     private var queue: RequestQueue? = null
 
-    fun getData() {
-
+    fun getData(id:String) {
         queue = Volley.newRequestQueue(getApplication())
-        val url = "http://adv.jitusolution.com/student.php"
+        val url = "http://adv.jitusolution.com/student.php?id=$id"
 
         val stringRequest = StringRequest(
             Request.Method.GET, url,
             {
                 Log.d("showvoley", it)
-                val sType = object : TypeToken<List<Student>>() { }.type
-                val result = Gson().fromJson<List<Student>>(it, sType)
-                studentLD.value = result[0]
+                val result = Gson().fromJson<Student>(it, Student::class.java)
+                studentLD.value = result
 
                 Log.d("showvoley", result.toString())
 

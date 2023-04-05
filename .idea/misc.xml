@@ -4,7 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/AdvWeek4/app/src/main/res/layout/activity_main.xml" value="0.11302083333333333" />
-        <entry key="..\:/AdvWeek4/app/src/main/res/layout/fragment_student_detail.xml" value="0.20878623188405798" />
+        <entry key="..\:/AdvWeek4/app/src/main/res/layout/fragment_student_detail.xml" value="0.1" />
         <entry key="..\:/AdvWeek4/app/src/main/res/layout/fragment_student_list.xml" value="0.2" />
         <entry key="..\:/AdvWeek4/app/src/main/res/layout/student_list_item.xml" value="0.264" />
       </map>

@@ -17,16 +17,6 @@ import com.example.advweek4.model.StudentListAdapter
 import com.example.advweek4.viewmodel.ListViewModel
 import kotlinx.android.synthetic.main.fragment_student_list.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [StudentListFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class StudentListFragment : Fragment() {
     private lateinit var viewModel: ListViewModel
     private val studentListAdapter = StudentListAdapter(arrayListOf())
@@ -74,7 +64,7 @@ class StudentListFragment : Fragment() {
     fun observeViewModel() {
         viewModel.studentsLD.observe(viewLifecycleOwner, Observer {
             //studentListAdapter.updateStudentList(it)
-            
+
         })
 
         viewModel.studentLoadErrorLD.observe(viewLifecycleOwner, Observer{

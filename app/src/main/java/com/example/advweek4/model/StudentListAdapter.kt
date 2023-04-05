@@ -12,7 +12,7 @@ import com.example.advweek4.util.loadImage
 import com.example.advweek4.view.StudentListFragmentDirections
 import kotlinx.android.synthetic.main.student_list_item.view.*
 
-class StudentListAdapter(val studenList:ArrayList<Student>):RecyclerView.Adapter<StudentListAdapter.StudentViewHolder>() {
+class StudentListAdapter(val studentList:ArrayList<Student>):RecyclerView.Adapter<StudentListAdapter.StudentViewHolder>() {
     class StudentViewHolder(var view: View) : RecyclerView.ViewHolder(view)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):StudentViewHolder {
@@ -23,25 +23,25 @@ class StudentListAdapter(val studenList:ArrayList<Student>):RecyclerView.Adapter
     }
 
     override fun onBindViewHolder(holder: StudentViewHolder, position: Int) {
-        holder.view.txtID.text = studenList[position].id
-        holder.view.txtName.text = studenList[position].name
+        holder.view.txtID.text = studentList[position].id
+        holder.view.txtName.text = studentList[position].name
         holder.view.btnDetail.setOnClickListener {
-            val action = StudentListFragmentDirections.actionStudentDetail()
+            val action = StudentListFragmentDirections.actionStudentDetail(studentList[position].id.toString())
             Navigation.findNavController(it).navigate(action)
         }
         var imageView = holder.view.findViewById<ImageView>(R.id.imageView)
         var progressBar = holder.view.findViewById<ProgressBar>(R.id.progressBar)
-        imageView.loadImage(studenList[position].photoUrl, progressBar)
+        imageView.loadImage(studentList[position].photoUrl, progressBar)
 
     }
 
     override fun getItemCount(): Int {
-        return studenList.size
+        return studentList.size
     }
 
     fun updateStudentList(newStudentList: ArrayList<Student>) {
-        studenList.clear()
-        studenList.addAll(newStudentList)
+        studentList.clear()
+        studentList.addAll(newStudentList)
         notifyDataSetChanged()
     }
 
