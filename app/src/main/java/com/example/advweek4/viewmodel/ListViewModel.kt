@@ -33,11 +33,10 @@ class ListViewModel(application: Application): AndroidViewModel(application)
         val stringRequest = StringRequest(
             Request.Method.GET, url,
             {
-                loadingLD.value = false
                 Log.d("showvoley", it)
-                val sType = object : TypeToken<List<Student>>() { }.type
-                val result = Gson().fromJson<List<Student>>(it, sType)
-                studentsLD.value = result as ArrayList<Student>?
+                val sType = object : TypeToken<ArrayList<Student>>() { }.type
+                val result = Gson().fromJson<ArrayList<Student>>(it, sType)
+                studentsLD.value = result
                 loadingLD.value = false
 
                 Log.d("showvoley", result.toString())

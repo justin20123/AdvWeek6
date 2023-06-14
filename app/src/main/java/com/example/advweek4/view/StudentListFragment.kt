@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.advweek4.R
-import com.example.advweek4.model.StudentListAdapter
 import com.example.advweek4.viewmodel.ListViewModel
 import kotlinx.android.synthetic.main.fragment_student_list.*
 
@@ -22,12 +21,15 @@ class StudentListFragment : Fragment() {
     private val studentListAdapter = StudentListAdapter(arrayListOf())
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this).get(ListViewModel::class.java)
         viewModel.refresh()
 
         val recView = view.findViewById<RecyclerView>(R.id.recView)
         recView.layoutManager = LinearLayoutManager(context)
         recView.adapter = studentListAdapter
+
+        observeViewModel()
 
         val refreshLayout = view?.findViewById<SwipeRefreshLayout>(R.id.refreshLayout)
         refreshLayout.setOnRefreshListener {
@@ -39,31 +41,13 @@ class StudentListFragment : Fragment() {
         }
 
 
-        observeViewModel()
-        viewModel.studentLoadErrorLD.observe(viewLifecycleOwner, Observer {
-            val txtError = view?.findViewById<TextView>(R.id.txtError)
-            if(it == true) {
-                txtError.visibility = View.VISIBLE
-            } else {
-                txtError.visibility = View.GONE
-            }
-        })
-        viewModel.loadingLD.observe(viewLifecycleOwner, Observer {
-            val progressLoad = view?.findViewById<ProgressBar>(R.id.progressLoad)
-            val recView = view?.findViewById<RecyclerView>(R.id.recView)
-            if(it == true) {
-                recView.visibility = View.GONE
-                progressLoad.visibility = View.VISIBLE
-            } else {
-                recView.visibility = View.VISIBLE
-                progressLoad.visibility = View.GONE
-            }
-        })
+
+
     }
 
     fun observeViewModel() {
         viewModel.studentsLD.observe(viewLifecycleOwner, Observer {
-            //studentListAdapter.updateStudentList(it)
+            studentListAdapter.updateStudentList(it)
 
         })
 
